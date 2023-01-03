@@ -1,3 +1,3 @@
-# News-Feed-Aggregator-
+# News-Feed
 Basic News RSS Feed Collector using StreamLit
-"# News-Feed" 
+
