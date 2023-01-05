@@ -16,9 +16,9 @@ def run():
         submitted = st.form_submit_button("Submit")
         if submitted:
             try:
-                url = "https://free-news.p.rapidapi.com/v1/search"
+                url = "https://any-anime.p.rapidapi.com/anime/img"
                 querystring = {"q":search, "lang":"en", "page":1, "page_size":5}
-                headers = {'x-rapidapi-host':"free-news.p.rapidapi.com", 'x-rapidapi-key':"258f942d2cmsh3f4752cc251327dp105b97jsnba19d0e454cf"}
+                headers = {'X-RapidAPI-Key': '258f942d2cmsh3f4752cc251327dp105b97jsnba19d0e454cf','X-RapidAPI-Host': 'any-anime.p.rapidapi.com'}
                 response = requests.request("GET", url, headers=headers, params = querystring)
                 response_dict = json.loads(response.text)
                 links = [response_dict['articles'][i]['link'] for i in range(len(response_dict['articles']))]
