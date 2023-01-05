@@ -28,5 +28,11 @@ def run():
         article_texts.append(news_article.text)
     for text in article_texts:
         article_summaries.append(summarizer(text)[0]['summary_text'])
+    for i in range(len(article_texts)):
+        st.header(article_titles[i])
+        st.subheader('Summary of Article')
+        st.markdown(article_summaries[i])
+        with st.expander('Full Article'):
+            st.markdown(article_texts[i])
 if __name__=='__main__':
     run()
