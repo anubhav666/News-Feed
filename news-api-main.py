@@ -1,7 +1,8 @@
 import streamlit as st
 import requests
+import json
+from newspaper import Article
 from transformers import pipeline
-
 
 st.set_page_config(page_title='Short News App', layout='wide', initial_sidebar_state = 'expanded')
 st.title('Welcome to Short News App')
@@ -17,6 +18,15 @@ def run():
     "X-RapidAPI-Host": "animi.p.rapidapi.com"
     }
     response = requests.request("GET", url, headers=headers, params=querystring)
-    print(response)
+    response_dict = json.loads(response.text)
+    links = [response_dict['articles'][i]['link'] for i in range(len(response_dict['articles']))]
+    for link in links:
+        news_article = Article(link, language = 'en')
+        news_article.download()
+        news_article.parse()
+        article_titles.append(news_article.title)
+        article_texts.append(news_article.text)
+    for text in article_texts:
+        article_summaries.append(summarizer(text)[0]['summary_text'])
 if __name__=='__main__':
     run()
